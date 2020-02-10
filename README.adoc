@@ -1,0 +1,33 @@
+= Demo task
+
+Demo project of Vert.x framework that parses text files and provides analytics
+
+== Prerequisites
+
+* Apache Maven
+* JDK 8
+
+== Getting started
+
+Clone project from GitHub
+
+[source]
+----
+git clone https://github.com/AiRmode/
+----
+
+== How to run the project
+
+Once you've cloned the project, `cd` to its directory.
+Open `conf/config.json`. Put path to an observable folder. The application observes this directory and parse new/modified files in it.
+
+Then execute following commands:
+
+[source]
+----
+mvn clean package
+java -jar demo-task-1.0-SNAPSHOT-fat.jar -conf conf/config.json
+----
+Where `-conf conf/config.json` - if a default path to config the directory.
+
+Layouts in the project used from `A gentle guide to asynchronous programming with Eclipse Vert.x for Java developers`
