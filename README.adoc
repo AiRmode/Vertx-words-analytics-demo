@@ -26,7 +26,7 @@ Then execute following commands:
 [source]
 ----
 mvn clean package
-java -jar demo-task-1.0-SNAPSHOT-fat.jar -conf conf/config.json
+java -jar target/demo-task-1.0-SNAPSHOT-fat.jar -conf conf/config.json
 ----
 Where `-conf conf/config.json` - if a default path to config the directory.
 
