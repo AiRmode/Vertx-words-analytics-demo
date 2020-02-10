@@ -38,8 +38,7 @@ public class FileParserProcessManager extends AbstractVerticle {
   }
 
   private void handleFileParsingDone(Message<JsonObject> tMessage) {
-//    String words = tMessage.body().getString("words");
-    logger.info("Parsing done for the file " + tMessage.body().getString("path"));//+ " words: " + words
+    logger.info("Parsing done for the file " + tMessage.body().getString("path"));
     EventBus eventBus = vertx.eventBus();
     eventBus.send(WordsAnalytics.FILESYSTEM_ANALYZE_TEXT_TO_ANALYZE, tMessage.body());
   }
