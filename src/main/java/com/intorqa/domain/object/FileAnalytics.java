@@ -1,13 +1,15 @@
-package com.intorqa.domain.objects;
+package com.intorqa.domain.object;
 
 import io.vertx.core.json.JsonObject;
+
+import java.util.List;
 
 public class FileAnalytics extends JsonObject {
   private String path;
   private long nanoTimestamp;
-  private String[] words;
+  private List<String> words;
 
-  public FileAnalytics(String path, long nanoTimestamp, String[] words) {
+  public FileAnalytics(String path, long nanoTimestamp, List<String> words) {
     this.words = words;
     this.path = path;
     this.nanoTimestamp = nanoTimestamp;
@@ -21,7 +23,7 @@ public class FileAnalytics extends JsonObject {
     return nanoTimestamp;
   }
 
-  public String[] getWords() {
+  public List<String> getWords() {
     return words;
   }
 

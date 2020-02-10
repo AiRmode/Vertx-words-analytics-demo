@@ -1,11 +1,11 @@
-package com.intorqa.verticles.filters;
+package com.intorqa.verticle.filter;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
-import static com.intorqa.verticles.processmanager.FileReaderProcessManager.FILEREADER_PROCESSMANAGER_FILE_NEW;
+import static com.intorqa.verticle.processmanager.FileReaderProcessManager.FILEREADER_PROCESSMANAGER_FILE_NEW;
 
 public class DeduplicationFilter extends AbstractVerticle {
   public static final String FILE_SYSTEM_WATCHER_DEDUPLICATION_FILTER = "filesystem.watcher.updates";

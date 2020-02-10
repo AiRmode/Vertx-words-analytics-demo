@@ -1,6 +1,6 @@
-package com.intorqa.verticles;
+package com.intorqa.verticle;
 
-import com.intorqa.verticles.filters.DeduplicationFilter;
+import com.intorqa.verticle.filter.DeduplicationFilter;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
@@ -26,7 +26,8 @@ public class FileSystemWatcher extends AbstractVerticle {
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
     isStarted = true;
-    Path path = new File("observable-directory").toPath();
+    String dirName = config().getString("observable-directory");
+    Path path = new File(dirName).toPath();
 
     logger.info(String.format("Watching directory %s", path.toAbsolutePath()));
     boolean directory = Files.isDirectory(path);

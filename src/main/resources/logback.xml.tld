@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
 
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-        version="2.1">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
 
-    <tlib-version>1.0</tlib-version>
-    <short-name>myshortname</short-name>
-    <uri>http://mycompany.com</uri>
+  <logger name="io.netty" level="info"/>
+  <logger name="io.vertx" level="info"/>
+  <logger name="com.intorqa" level="debug"/>
 
-    <!-- Invoke 'Generate' action to add tags or functions -->
+  <root level="info">
+    <appender-ref ref="STDOUT"/>
+  </root>
 
-</taglib>
+</configuration>

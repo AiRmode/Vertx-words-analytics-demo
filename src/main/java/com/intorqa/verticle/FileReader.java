@@ -1,6 +1,6 @@
-package com.intorqa.verticles;
+package com.intorqa.verticle;
 
-import com.intorqa.verticles.processmanager.FileReaderProcessManager;
+import com.intorqa.verticle.processmanager.FileReaderProcessManager;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;

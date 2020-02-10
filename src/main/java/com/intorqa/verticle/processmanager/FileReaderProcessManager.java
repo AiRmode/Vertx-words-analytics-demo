@@ -1,5 +1,6 @@
-package com.intorqa.verticles.processmanager;
+package com.intorqa.verticle.processmanager;
 
+import com.intorqa.verticle.WordsAnalytics;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
@@ -8,8 +9,8 @@ import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.intorqa.verticles.FileReader.FILE_READER;
-import static com.intorqa.verticles.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_NEW;
+import static com.intorqa.verticle.FileReader.FILE_READER;
+import static com.intorqa.verticle.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_NEW;
 
 public class FileReaderProcessManager extends AbstractVerticle {
   private static final Logger logger = LoggerFactory.getLogger(FileReaderProcessManager.class);
@@ -32,6 +33,8 @@ public class FileReaderProcessManager extends AbstractVerticle {
   private void handleFileReadingDone(Message<JsonObject> tMessage) {
     JsonObject body = tMessage.body();
     logger.info("Reading for the file completed: " + body.getString("path"));
+    EventBus eventBus = vertx.eventBus();
+    eventBus.send(WordsAnalytics.FILESYSTEM_ANALYZE_FILE_PARSED, tMessage.body());
   }
 
   private void handleFileReadingInProgress(Message<JsonObject> tMessage) {

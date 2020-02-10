@@ -1,5 +1,6 @@
-package com.intorqa.verticles.processmanager;
+package com.intorqa.verticle.processmanager;
 
+import com.intorqa.verticle.WordsAnalytics;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
@@ -8,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.intorqa.verticles.FileParser.FILE_PARSER_PARSE_FILE;
+import static com.intorqa.verticle.FileParser.FILE_PARSER_PARSE_FILE;
 
 public class FileParserProcessManager extends AbstractVerticle {
   private static final Logger logger = LoggerFactory.getLogger(FileParserProcessManager.class);
@@ -28,7 +29,7 @@ public class FileParserProcessManager extends AbstractVerticle {
   }
 
   private void handleFileParsingFailed(Message<JsonObject> tMessage) {
-    logger.error("failed to parse the message " + tMessage);
+    logger.error("failed to parse the message " + tMessage.body());
   }
 
   private void handleNewFile(Message<JsonObject> tMessage) {
@@ -37,8 +38,10 @@ public class FileParserProcessManager extends AbstractVerticle {
   }
 
   private void handleFileParsingDone(Message<JsonObject> tMessage) {
-    String words = tMessage.body().getString("words");
-    logger.info("Parsing done for the file " + tMessage.body().getString("path") + " words: " + words);
+//    String words = tMessage.body().getString("words");
+    logger.info("Parsing done for the file " + tMessage.body().getString("path"));//+ " words: " + words
+    EventBus eventBus = vertx.eventBus();
+    eventBus.send(WordsAnalytics.FILESYSTEM_ANALYZE_TEXT_TO_ANALYZE, tMessage.body());
   }
 
 }

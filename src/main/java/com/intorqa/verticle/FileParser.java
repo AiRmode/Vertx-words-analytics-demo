@@ -1,23 +1,23 @@
-package com.intorqa.verticles;
+package com.intorqa.verticle;
 
-import com.intorqa.domain.objects.FileAnalytics;
-import com.intorqa.verticles.processmanager.FileParserProcessManager;
+import com.intorqa.domain.object.FileAnalytics;
+import com.intorqa.verticle.processmanager.FileParserProcessManager;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.intorqa.verticles.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_DONE;
-import static com.intorqa.verticles.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_FAILED;
+import static com.intorqa.verticle.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_DONE;
+import static com.intorqa.verticle.processmanager.FileParserProcessManager.FILEPARSER_PROCESSMANAGER_FILE_READING_FAILED;
 
 public class FileParser extends AbstractVerticle {
   private static final Logger logger = LoggerFactory.getLogger(FileParserProcessManager.class);
@@ -61,7 +61,8 @@ public class FileParser extends AbstractVerticle {
         eventBus.send(FILEPARSER_PROCESSMANAGER_FILE_READING_DONE, new JsonObject()
           .put("path", analytics.getPath())
           .put("nanoTimestamp", analytics.getNanoTimestamp())
-          .put("words", Arrays.toString(analytics.getWords())));
+          .put("words", new JsonArray(analytics.getWords())));
+
       } else {
         eventBus.send(FILEPARSER_PROCESSMANAGER_FILE_READING_FAILED, new JsonObject()
           .put("path", path)
@@ -80,6 +81,6 @@ public class FileParser extends AbstractVerticle {
       words.add(group);
     }
 
-    return new FileAnalytics(path, nanoTimestamp, words.toArray(new String[0]));
+    return new FileAnalytics(path, nanoTimestamp, words);
   }
 }
