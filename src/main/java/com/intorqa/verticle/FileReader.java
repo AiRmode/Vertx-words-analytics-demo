@@ -23,6 +23,8 @@ public class FileReader extends AbstractVerticle {
   public void start(Promise<Void> startPromise) throws Exception {
     EventBus eventBus = vertx.eventBus();
     eventBus.consumer(FILE_READER, this::update);
+
+    startPromise.complete();
   }
 
   private <T> void update(Message<T> tMessage) {
