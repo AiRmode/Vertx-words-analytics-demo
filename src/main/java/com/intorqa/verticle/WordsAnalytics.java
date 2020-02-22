@@ -21,10 +21,10 @@ public class WordsAnalytics extends AbstractVerticle {
   public static final String FILESYSTEM_ANALYZE_REQUEST_STATISTICS = "filesystem.analyze.file.requestStatistics";
 
   //store in memory just for demo purposes
-  private static volatile AtomicLong parsedFilesCount = new AtomicLong(0);
-  private static volatile AtomicLong parsedWordsCount = new AtomicLong(0);
+  private static final AtomicLong parsedFilesCount = new AtomicLong(0);
+  private static final AtomicLong parsedWordsCount = new AtomicLong(0);
 
-  private static volatile Set<String> uniqueWords = new ConcurrentHashSet<>();
+  private static final Set<String> uniqueWords = new ConcurrentHashSet<>();
   private static final Map<String, AtomicLong> wordsStatistics = new ConcurrentHashMap<>();
 
   @Override
