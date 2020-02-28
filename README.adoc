@@ -19,7 +19,7 @@ git clone https://github.com/AiRmode/Vertx-words-analytics-demo
 == How to run the project
 
 Once you've cloned the project, `cd` to its directory.
-Open `conf/config.json`. Put path to an observable folder. The application observes this directory and parse new/modified files in it.
+Open `conf/config.json`. Put a path to an observable folder. The application observes this directory and parses new/modified files in it.
 
 Then execute following commands:
 
